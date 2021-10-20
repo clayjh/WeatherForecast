@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_16"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/DefaultText.Large"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rain"
+        app:layout_constraintHorizontal_weight="1"
+        tools:text="Today"/>
+
+    <TextView
+        android:id="@+id/rain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/DefaultText.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/day"
+        app:layout_constraintEnd_toStartOf="@id/highlow"
+        app:layout_constraintHorizontal_weight="1"
+        tools:text="1%"
+        android:gravity="center_vertical"
+        app:drawableStartCompat="@drawable/rain_chance" />
+
+    <TextView
+        android:id="@+id/highlow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/DefaultText.Large"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rain"
+        app:layout_constraintEnd_toStartOf="@id/forecastImage"
+        app:layout_constraintHorizontal_weight="1"
+        tools:text="80/60"/>
+
+    <ImageView
+        android:id="@+id/forecastImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/sunny"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/highlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

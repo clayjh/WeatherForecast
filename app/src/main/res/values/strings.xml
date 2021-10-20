@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WeatherForecast</string>
+
+    <string name="title_current_weather">Current Weather</string>
+    <string name="title_7_forecast">7 Day Forecast</string>
+    <string name="desc_7_forecast">7-Day Forecast</string>
+    <string name="weather_image">weatherImage</string>
+    <string name="degree_holder">%d° F</string>
+    <string name="high_low_holder">%d°/%d°</string>
+    <string name="high_holder">High: %s</string>
+    <string name="low_holder">Low: %s</string>
+    <string name="humidity_holder">Humidity: %d%%</string>
+    <string name="rain_holder">%d%%</string>
+    <string name="error_weather_lookup">There is an error when searching for this cities weather. Please try again.</string>
+    <string name="ok">OK</string>
+    <string name="try_again">Try again?</string>
+    <string name="error_could_not_location">Could not get location.</string>
+
+</resources>

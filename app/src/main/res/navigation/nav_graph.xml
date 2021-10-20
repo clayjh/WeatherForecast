@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/currentWeatherFragment">
+
+    <fragment
+        android:id="@+id/currentWeatherFragment"
+        android:name="com.clay.weatherforecast.CurrentWeatherFragment"
+        tools:layout="@layout/current_weather_fragment">
+        <action
+            android:id="@+id/action_currentWeatherFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment"
+            app:enterAnim="@anim/left_anim"
+            app:exitAnim="@anim/right_anim"
+            app:popEnterAnim="@anim/left_back_anim"
+            app:popExitAnim="@anim/right_back_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.clay.weatherforecast.ForecastFragment"
+        tools:layout="@layout/forecast_fragment" />
+</navigation>

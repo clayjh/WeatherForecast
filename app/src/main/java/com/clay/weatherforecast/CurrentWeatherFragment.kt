@@ -17,7 +17,7 @@ import java.util.*
 class CurrentWeatherFragment : Fragment() {
 
     private val sharedWeatherViewModel: SharedWeatherViewModel by activityViewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
+    //private val mainViewModel: MainViewModel by activityViewModels()
     private var binding: CurrentWeatherFragmentBinding? = null
 
     override fun onCreateView(
@@ -37,11 +37,13 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.liveLocation().observe(viewLifecycleOwner) {
-            sharedWeatherViewModel.getCityWeather(it)
+        sharedWeatherViewModel.lastLocation.observe(viewLifecycleOwner) {
+            it?.let {
+                sharedWeatherViewModel.getCityWeather(it)
+            }
         }
 
-        sharedWeatherViewModel.liveWeatherResult().observe(viewLifecycleOwner) {
+        sharedWeatherViewModel.weatherResult.observe(viewLifecycleOwner) {
             // set data
             when(it) {
                 is WeatherResult.OnSuccess -> {
@@ -85,21 +87,18 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun showWeatherError() {
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.setMessage(getString(R.string.error_weather_lookup))
-        dialog.setPositiveButton(getString(R.string.ok)) { _, _ ->
-            (activity as MainActivity).getLastLocation()
-        }
-        dialog.create().apply {
-            show()
-        }
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.error_weather_lookup))
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                (activity as MainActivity).getLastLocation()
+            }
+            .create()
+            .show()
     }
 
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
     }
-
-
 
 }

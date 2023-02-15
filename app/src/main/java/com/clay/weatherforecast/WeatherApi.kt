@@ -14,13 +14,12 @@ import retrofit2.http.Query
  **/
 object WeatherApi {
     val service: WeatherApiService by lazy {
-        val retrofit = Retrofit.Builder()
+        Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(authOkHttpClient())
             .baseUrl(BuildConfig.OPEN_WEATHER_BASE_URL)
             .build()
-
-        retrofit.create(WeatherApiService::class.java)
+            .create(WeatherApiService::class.java)
     }
 }
 

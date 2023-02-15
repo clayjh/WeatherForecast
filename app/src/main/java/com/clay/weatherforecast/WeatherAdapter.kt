@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by Clayton Hatathlie on 10/18/21
  **/
-class WeatherAdapter(private val list: List<Daily>,
+class WeatherAdapter(
 ) : RecyclerView.Adapter<WeatherAdapter.WeatherHolder>(){
+
+    private var list: List<Daily> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,6 +40,12 @@ class WeatherAdapter(private val list: List<Daily>,
         return list.size
     }
 
+    fun setData(data: List<Daily>) {
+        list = data
+        notifyDataSetChanged()
+    }
+
+    // TODO use viewbinding
     inner class WeatherHolder(view: View) : RecyclerView.ViewHolder(view) {
         val day: TextView = view.findViewById(R.id.day)
         val rain: TextView = view.findViewById(R.id.rain)

@@ -10,6 +10,6 @@ import androidx.lifecycle.ViewModel
  **/
 class MainViewModel : ViewModel() {
 
-    var lastLocation = MutableLiveData<Location>()
-    fun liveLocation() : LiveData<Location> = lastLocation
+//    var lastLocation = MutableLiveData<Location>()
+//    fun liveLocation() : LiveData<Location> = lastLocation
 }

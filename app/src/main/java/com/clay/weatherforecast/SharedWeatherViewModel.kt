@@ -12,17 +12,24 @@ class SharedWeatherViewModel : ViewModel() {
     //TODO make injectable
     private val weatherRepo = WeatherRepository()
 
-    private val weatherResult = MutableLiveData<WeatherResult>()
-    fun liveWeatherResult() : LiveData<WeatherResult> = weatherResult
+    private var _lastLocation = MutableLiveData<Location>()
+    val lastLocation: LiveData<Location> = _lastLocation
 
-    fun getCityWeather(location: Location) = viewModelScope.launch(Dispatchers.Main) {
+    private var _weatherResult = MutableLiveData<WeatherResult>()
+    val weatherResult : LiveData<WeatherResult> = _weatherResult
+
+    fun getCityWeather(location: Location) = viewModelScope.launch {
         val result = weatherRepo.getCityWeather(location)
-        weatherResult.value = when(result) {
-            is WeatherResponse.OnSuccess -> {
+        _weatherResult.value = when(result) {
+            is WeatherResponse.OnSuccess ->
                 WeatherResult.OnSuccess(result.weatherData)
-            }
-            is WeatherResponse.OnError -> WeatherResult.OnError(result.error.localizedMessage?:"unknown")
+            is WeatherResponse.OnError ->
+                WeatherResult.OnError(result.error.localizedMessage?:"unknown")
         }
+    }
+
+    fun setLocation(location: Location) {
+        _lastLocation.value = location
     }
 }
 

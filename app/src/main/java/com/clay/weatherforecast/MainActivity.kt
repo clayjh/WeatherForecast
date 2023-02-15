@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val sharedWeatherViewModel: SharedWeatherViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnCompleteListener { taskLocation ->
                 if (taskLocation.isSuccessful && taskLocation.result != null) {
-                    mainViewModel.lastLocation.value = taskLocation.result
+                    sharedWeatherViewModel.setLocation(taskLocation.result)
                 } else {
                     val snackbar = Snackbar.make(
                         CoordinatorLayout(this),
@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

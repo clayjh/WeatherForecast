@@ -21,16 +21,19 @@ class WeatherRepository {
         tempUnit: TempUnit = TempUnit.IMPERIAL
     ): WeatherResponse =
         withContext(Dispatchers.IO) {
-            val result =
-                weatherApiService.getCityWeather(
-                    location.latitude,
-                    location.longitude,
-                    tempUnit.unit
-                )
-            if (result.isSuccessful) {
-                WeatherResponse.OnSuccess(result.body())
-            } else {
-                WeatherResponse.OnError(Throwable("${result.code()}"))
+            try {
+                val result = weatherApiService.getCityWeather(
+                        location.latitude,
+                        location.longitude,
+                        tempUnit.unit
+                    )
+                if (result.isSuccessful) {
+                    WeatherResponse.OnSuccess(result.body())
+                } else {
+                    WeatherResponse.OnError(Throwable("${result.code()}"))
+                }
+            } catch (e: Exception) {
+                WeatherResponse.OnError(e)
             }
         }
 }
